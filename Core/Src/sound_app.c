@@ -11,6 +11,7 @@
 /* USER CODE END Header */
 
 #include "sound_app.h"
+#include "level_meter.h"
 #include "dfplayer_proto.h"
 #include "alarm_manager.h"
 #include "staplez_studio.h"
@@ -1216,24 +1217,34 @@ void Sound_App_Render(void)
         else if (selected_ctrl == 2) sh1106_drawRect(4, 34, 120, 11, SH1106_WHITE);
 
     } else {
-        // VIEW 3: PCM1808 Stereo VU Meter & Level Display (Page 4)
-        sh1106_drawString(4, 2, "STEREO VU METER", 1, SH1106_WHITE);
-        sh1106_drawString(104, 2, "96k", 1, SH1106_WHITE);
+        // VIEW 3: real stereo level meter (STM32 ADC on PA4 = left, PA5 = right), see level_meter.h
+        sh1106_drawString(4, 2, "STEREO LEVEL", 1, SH1106_WHITE);
+        sh1106_drawString(98, 2, "PA4/5", 1, SH1106_WHITE);
         sh1106_drawHLine(0, 10, 128, SH1106_WHITE);
 
-        // Stereo Channels Left & Right peak bars
-        sh1106_drawString(4, 15, "CH 1 (L):", 1, SH1106_WHITE);
-        sh1106_drawRect(60, 16, 64, 10, SH1106_WHITE);
-        uint32_t tick = HAL_GetTick();
-        uint8_t lWidth = (uint8_t)(((tick / 50) % 24) * 2 + 10);
-        if (lWidth > 60) lWidth = 60;
-        sh1106_fillRect(62, 18, lWidth, 6, SH1106_WHITE);
+        LevelMeter_Update();
+        const level_t *lvl = LevelMeter_Get();
 
-        sh1106_drawString(4, 30, "CH 2 (R):", 1, SH1106_WHITE);
-        sh1106_drawRect(60, 31, 64, 10, SH1106_WHITE);
-        uint8_t rWidth = (uint8_t)((((tick + 200) / 45) % 22) * 2 + 12);
-        if (rWidth > 60) rWidth = 60;
-        sh1106_fillRect(62, 33, rWidth, 6, SH1106_WHITE);
+        sh1106_drawString(4, 13, "CH 1 (L):", 1, SH1106_WHITE);
+        sh1106_drawRect(60, 14, 64, 9, SH1106_WHITE);
+        if (lvl->seg[0]) sh1106_fillRect(62, 16, (uint8_t)(lvl->seg[0] * 3U), 5, SH1106_WHITE);
+        if (lvl->peak[0] > lvl->seg[0]) sh1106_drawVLine((uint8_t)(61U + lvl->peak[0] * 3U), 16, 5, SH1106_WHITE);
+
+        sh1106_drawString(4, 25, "CH 2 (R):", 1, SH1106_WHITE);
+        sh1106_drawRect(60, 26, 64, 9, SH1106_WHITE);
+        if (lvl->seg[1]) sh1106_fillRect(62, 28, (uint8_t)(lvl->seg[1] * 3U), 5, SH1106_WHITE);
+        if (lvl->peak[1] > lvl->seg[1]) sh1106_drawVLine((uint8_t)(61U + lvl->peak[1] * 3U), 28, 5, SH1106_WHITE);
+
+        {
+            char t[24];
+            if (!lvl->adc_ok)                          snprintf(t, sizeof(t), "ADC ERROR");
+            else if (!lvl->seg[0] && !lvl->seg[1])     snprintf(t, sizeof(t), "NO SIGNAL");
+            else {
+                int dl = LevelMeter_Db(lvl->seg[0]), dr = LevelMeter_Db(lvl->seg[1]);
+                snprintf(t, sizeof(t), "L %d R %d DB", dl, dr);
+            }
+            sh1106_drawString(4, 37, t, 1, SH1106_WHITE);
+        }
 
         nav_left(selected_ctrl == 0);     // Index 0: back to Page 3 Adv. Sound Settings
         nav_right(selected_ctrl == 1);    // Index 1: loops to Page 1 Volume & Tone

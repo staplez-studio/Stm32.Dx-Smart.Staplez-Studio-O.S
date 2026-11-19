@@ -25,7 +25,7 @@
 
 #define ESP01S_MAX_SSID_LEN     32
 #define ESP01S_MAX_PWD_LEN      32
-#define ESP01S_MAX_SCAN_APS     12
+#define ESP01S_MAX_SCAN_APS     16
 #define ESP01S_IP_STR_LEN       18
 
 typedef enum {

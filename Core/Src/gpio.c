@@ -107,9 +107,15 @@ void MX_GPIO_Init(void)
 
   /* Configure GPIO pins for Texas Instruments PCM1808 24-bit 96kHz Stereo ADC (I2S2/SPI2) */
   /* PB12 = LRCK / Word Select, PB13 = BCK / Bit Clock, PB15 = DOUT / Serial Audio Data */
-  GPIO_InitStruct.Pin = PCM1808_LRCK_Pin | PCM1808_BCK_Pin;
+  GPIO_InitStruct.Pin = PCM1808_BCK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /* PB12 is the PJ26's SW2 user button (to GND). Pull-up so a press reads low; the PCM1808 LRCK is not usable on the F103 anyway. */
+  GPIO_InitStruct.Pin = PCM1808_LRCK_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   GPIO_InitStruct.Pin = PCM1808_DOUT_Pin;
