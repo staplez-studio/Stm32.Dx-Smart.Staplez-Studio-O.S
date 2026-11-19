@@ -1,8 +1,5 @@
-<p align="center">
-  <img src="https://github.com/staplez-studio/BluePill_Extra_Applications/blob/main/github-banner-1024x512.png?raw=true" alt="Staplez Studio Banner" width="85%" />
-</p>
 # STM32F103C8/CB (BluePill) SH1106 OLED Project - SSOS
-Complete C HAL Firmware Suite Staplez Studio OS
+Complete C HAL Firmware Suite mimicking the Staplez Studio OS Emulator to a tee!
 Features Infrared (IR) Remote Control on PA12, DS3231 RTC, Hardware TIM1 Fan PWM, SH1106 1.3" OLED, and full app suite.
 
 ---
