@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="https://github.com/staplez-studio/BluePill_Extra_Applications/blob/main/github-banner-1024x512.png?raw=true" alt="Staplez Studio Banner" width="85%" />
+</p>
 # Staplez Studio OS (SSOS)
 
 Firmware for a pocket clock, weather station and media box that runs on a **DX-SMART PJ26 v1.2** board (STM32F103C8T6, "Blue Pill" class). It drives a 128x64 SH1106 OLED, is operated with an IR remote, and uses an ESP32-CAM as its Wi-Fi source (time, weather) and as an SD card player into an ADAU1401/1701 DSP.
