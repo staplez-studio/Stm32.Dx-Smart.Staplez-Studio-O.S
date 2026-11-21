@@ -5,7 +5,7 @@
 
 Firmware for a pocket clock, weather station and media box that runs on a **DX-SMART PJ26 v1.2** board (STM32F103C8T6, "Blue Pill" class). It drives a 128x64 SH1106 OLED, is operated with an IR remote, and uses an ESP32-CAM as its Wi-Fi source (time, weather) and as an SD card player into an ADAU1401/1701 DSP.
 
-> **Status: not yet run on real hardware.** The logic is tested on a PC (259 host checks, plus a screen layout lint). Everything that touches real silicon, the ESP32-CAM sketch, the USB adapter firmware and the ADAU1401, is untested. See [Project status](#project-status).
+> **Status: not everything has been tested on real hardware.** The logic is tested on a PC (259 host checks, plus a screen layout lint). Everything that touches real silicon, the ESP32-CAM sketch, the USB adapter firmware and the ADAU1401, is untested. See [Project status](#project-status).
 
 ## Contents
 - [Features](#features)
