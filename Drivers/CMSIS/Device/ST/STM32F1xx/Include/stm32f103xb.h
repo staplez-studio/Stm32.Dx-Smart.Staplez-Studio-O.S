@@ -203,7 +203,9 @@ typedef struct {
 #define AHBPERIPH_BASE        (PERIPH_BASE + 0x00020000UL)
 
 #define TIM1_BASE             (APB2PERIPH_BASE + 0x00002C00UL)
+#define USART1_BASE           (APB2PERIPH_BASE + 0x00003800UL)
 #define USART2_BASE           (APB1PERIPH_BASE + 0x00004400UL)
+#define USART3_BASE           (APB1PERIPH_BASE + 0x00004800UL)
 #define I2C1_BASE             (APB1PERIPH_BASE + 0x00005400UL)
 #define BKP_BASE              (APB1PERIPH_BASE + 0x00006C00UL)
 
@@ -227,7 +229,9 @@ typedef struct {
 #define EXTI                  ((EXTI_TypeDef *) EXTI_BASE)
 #define RCC                   ((RCC_TypeDef *) RCC_BASE)
 #define I2C1                  ((I2C_TypeDef *) I2C1_BASE)
+#define USART1                ((USART_TypeDef *) USART1_BASE)
 #define USART2                ((USART_TypeDef *) USART2_BASE)
+#define USART3                ((USART_TypeDef *) USART3_BASE)
 #define TIM1                  ((TIM_TypeDef *) TIM1_BASE)
 #define PWR                   ((PWR_TypeDef *) PWR_BASE)
 #define BKP                   ((BKP_TypeDef *) BKP_BASE)

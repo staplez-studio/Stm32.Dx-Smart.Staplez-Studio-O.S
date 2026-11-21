@@ -27,4 +27,11 @@
 #define ADAU_P_SAT_DRIVE        0x0034U
 #define ADAU_P_CROSS_EN         0x0038U
 
+/* Input selector (optional). In SigmaStudio put a Mux / "Switch" block between the two sources:
+ *   source 0 = the ADC inputs  (DFPlayer analog output wired to the ADAU's analog input)
+ *   source 1 = serial input    (the ESP32-CAM's I2S, see docs/WIRING.md)
+ * and copy that cell's parameter address here. 0xFFFF = not used: the firmware then leaves the ADAU alone
+ * (you can also simply mix both sources in SigmaStudio, since only one plays at a time). */
+#define ADAU_P_INPUT_SEL        0xFFFFU
+
 #endif
