@@ -1,3 +1,4 @@
+Missing parts like a fuse this is work in progress lots of missing things actually. 
 <p align="center">
   <img src="https://github.com/staplez-studio/BluePill_Extra_Applications/blob/main/github-banner-1024x512.png?raw=true" alt="Staplez Studio Banner" width="85%" />
 </p>
